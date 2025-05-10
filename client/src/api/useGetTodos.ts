@@ -1,19 +1,19 @@
-import { useQuery } from "@tanstack/vue-query";
-import type { FetchedTodo } from "../types/todos";
+import { useQuery } from '@tanstack/vue-query';
+import type { FetchedTodo } from '../types/todos';
 
 // Vue Query Function
 export const useGetTodos = () => {
   return useQuery({
-    queryKey: ["todos"],
+    queryKey: ['todos'],
     queryFn: getTodos,
   });
 };
 
 // Fetch Todos Function
 const getTodos = async (): Promise<FetchedTodo[]> => {
-  const response = await fetch("https://dummyjson.com/todos?limit=3");
+  const response = await fetch('http://localhost:8080/todos');
 
-  if (!response) throw new Error("Error fetching todo data from todo-API");
+  if (!response) throw new Error('Error fetching todo data from todo-API');
 
   const data = await response.json();
 
