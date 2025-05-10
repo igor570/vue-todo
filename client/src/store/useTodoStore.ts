@@ -1,15 +1,16 @@
-import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
-import type { Todo } from "../types/todos";
+import { defineStore } from 'pinia';
+import { ref, type Ref } from 'vue';
+import type { Todo } from '../types/todos';
+import { v4 as uuidv4 } from 'uuid';
 
 interface createTodoStore {
   todos: Ref<Todo[] | undefined>;
   setTodos: (newTodos: Todo[]) => void;
   addTodo: (message: string) => void;
-  deleteTodo: (id: number) => void;
+  deleteTodo: (id: string) => void;
 }
 
-export const useTodoStore = defineStore("todos", (): createTodoStore => {
+export const useTodoStore = defineStore('todos', (): createTodoStore => {
   //State - with initial value
   const todos = ref();
 
@@ -20,7 +21,7 @@ export const useTodoStore = defineStore("todos", (): createTodoStore => {
 
   const addTodo = (todo: string) => {
     const newTodo: Todo = {
-      id: Date.now(),
+      id: uuidv4(),
       todo,
       completed: false,
     };
@@ -28,8 +29,8 @@ export const useTodoStore = defineStore("todos", (): createTodoStore => {
     todos.value = [...todos.value, newTodo];
   };
 
-  const deleteTodo = (id: number) => {
-    todos.value = todos.value.filter((todo: { id: number }) => id !== todo.id);
+  const deleteTodo = (id: string) => {
+    todos.value = todos.value.filter((todo: { id: string }) => id !== todo.id);
   };
 
   return { todos, setTodos, addTodo, deleteTodo };

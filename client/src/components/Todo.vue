@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useTodoStore } from "../store/useTodoStore";
+import { ref } from 'vue';
+import { useTodoStore } from '../store/useTodoStore';
 
 interface TodoProps {
-  id: number;
+  id: string;
   todo: string;
 }
 

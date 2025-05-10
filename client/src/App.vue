@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { useGetTodos } from "./api/useGetTodos";
-import { useTodoStore } from "./store/useTodoStore";
-import { storeToRefs } from "pinia";
-import Todo from "./components/Todo.vue";
+import { ref, watch } from 'vue';
+import { useGetTodos } from './api/useGetTodos';
+import { useTodoStore } from './store/useTodoStore';
+import { storeToRefs } from 'pinia';
+import Todo from './components/Todo.vue';
 
 // Vue-Query fetch -> Grab todos from API
 const { data: fetchedTodos, isLoading, error } = useGetTodos();
@@ -14,14 +14,17 @@ const { todos } = storeToRefs(store);
 const { setTodos, addTodo } = store;
 
 //Local State
-const newMessage = ref("");
+const newMessage = ref('');
 
 // Effect: Watch for changes in fetchedTodos and update the store
 watch(fetchedTodos, (newTodos) => {
   if (newTodos) setTodos(newTodos);
 });
 
-const handleSubmit = () => addTodo(newMessage.value);
+const handleSubmit = () => {
+  addTodo(newMessage.value);
+  newMessage.value = '';
+};
 </script>
 
 <template>

@@ -1,7 +1,7 @@
-export type Todo = Omit<FetchedTodo, "userId">;
+export type Todo = Omit<FetchedTodo, 'userId'>;
 
 export interface FetchedTodo {
-  id: number;
+  id: string;
   todo: string;
   completed: boolean;
   userId: number;
